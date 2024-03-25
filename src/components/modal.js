@@ -1,23 +1,30 @@
- function closePopupByEsc(event) { 
-  if (event.key === "Escape") { 
-      closePopup(popup); 
-  } 
+//ФУНКЦИЯ ОТКРЫТИЯ ПОПАПА
+function openModal(popup) {
+  popup.classList.add('popup_is-opened');
+  document.addEventListener('keydown', handleCloseByEsc);
+  popup.addEventListener('click', handleCloseByOverlay);
 }
 
-export function openPopup(popup) { 
-  popup.classList.add("popup_is-opened"); 
+//ФУНКЦИЯ ЗАКРЫТИЯ ПОПАПА
+function closeModal(popup) {
+  popup.classList.remove('popup_is-opened');
+  document.removeEventListener('keydown', handleCloseByEsc);
+  popup.removeEventListener('click', handleCloseByOverlay);
+}
 
-  document.addEventListener("keydown", closePopupByEsc); 
-} 
+//ФУНКЦИЯ ЗАКРЫТИЯ ПОПАПА ПО КЛИКУ НА ESCAPE
+function handleCloseByEsc(evt) {
+  if(evt.key === 'Escape') {
+      const popupIsOpen = document.querySelector('.popup_is-opened');
+      closeModal(popupIsOpen);
+  }
+}
 
-export function closePopup(popup) { 
-  popup.classList.remove("popup_is-opened"); 
-  
-  document.removeEventListener("keydown", closePopupByEsc); 
-} 
+//ФУНКЦИЯ ЗАКРЫТИЯ ПОПАПА ПО КЛИКУ НА ОВЕРЛЕЙ
+function handleCloseByOverlay(evt) {
+  if(evt.target.classList.contains('popup')) {
+      closeModal(evt.target);
+  }
+}
 
-export function closePopupByOverlay(popup) { 
-  popup.addEventListener("click", (e) => { 
-      if (e.target === e.currentTarget) closePopup(popup); 
-  }); 
-} 
+export { openModal, closeModal }; 

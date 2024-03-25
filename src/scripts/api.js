@@ -12,13 +12,13 @@ export const config = {
     }
     return Promise.reject(`Error: ${res.status}`);
   };
-  ///Загрузка информации о пользователе с сервера
+ 
   export const getUserInfo = async () => {
     return fetch(`${config.baseUrl}/users/me`, {
       headers: config.headers,
     }).then((res) => getResData(res));
   };
-  ///Загрузка карточек с сервера
+  
   export const getInitialCards = async () => {
     return fetch(`${config.baseUrl}/cards`, {
       headers: config.headers,
@@ -28,7 +28,7 @@ export const config = {
   export const getInitialInfo = async () => {
     return Promise.all([getUserInfo(), getInitialCards()]);
   };
-  /////редактирование профайла
+  
   export const editProfile = async (userProfileName, userProfileAbout) => {
     return fetch(`${config.baseUrl}/users/me`, {
       method: "PATCH",
@@ -40,7 +40,7 @@ export const config = {
     }).then((res) => getResData(res));
   };
   
-  ////Добавление новой карточки на сервер
+ 
   export const postNewCard = async (nameCard, linkCard) => {
     return fetch(`${config.baseUrl}/cards`, {
       method: "POST",
@@ -51,7 +51,7 @@ export const config = {
       }),
     }).then((res) => getResData(res));
   };
-  ///+ лайк
+
   export const putLike = async (cardId) => {
     return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
       method: "PUT",
@@ -59,14 +59,14 @@ export const config = {
     }).then((res) => getResData(res));
   };
   
-  ///удаление лайка
+  
   export const deleteLike = async (cardId) => {
     return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: config.headers,
     }).then((res) => getResData(res));
   };
-  // удаление карточки
+  
   export const deleteMyCard = async (cardId) => {
     return fetch(`${config.baseUrl}/cards/${cardId}`, {
       method: "DELETE",

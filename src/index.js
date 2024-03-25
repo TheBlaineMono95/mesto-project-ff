@@ -1,4 +1,4 @@
-import "./pages/index.css"; /// добавляем импорт главного файла стилей
+import "./pages/index.css";
 
 import { createCard, likeCard, getCardForDeletion } from "./scripts/card.js";
 
@@ -18,11 +18,9 @@ import {
 
 import { validationConfig } from "./scripts/validation.js";
 
-/// для создания карточки
 const cardTemplate = document.querySelector("#card-template").content;
 const placesList = document.querySelector(".places__list");
 
-/// Функция добавления карточки
 function addCard(
   card,
   placesList,
@@ -44,7 +42,6 @@ function addCard(
   placesList.append(cardElement);
 }
 
-/// Функция заполнения страницы карточками
 function fillCards(initialCards, profileId) {
   initialCards.forEach((card) => {
     addCard(
@@ -60,12 +57,10 @@ function fillCards(initialCards, profileId) {
   });
 }
 
-/// Функция button loading пока данные загружаются
 const showLoadingBtn = (isLoading, button) => {
   button.textContent = isLoading ? "Сохранение..." : "Сохранить";
 };
 
-/// Popup редактирования профиля
 const editPopup = document.querySelector(".popup_type_edit");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const closeEditButton = editPopup.querySelector(".popup__close");
@@ -86,13 +81,11 @@ closeEditButton.addEventListener("click", () => {
   closeModal(editPopup);
 });
 
-/// Функция сохранения полей ввода формы
 function fillPopupEditInputs() {
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileDescription.textContent;
 }
 
-/// Функция редактирования профиля
 function handleEditForm(evt) {
   evt.preventDefault();
   const nameValue = nameInput.value;
@@ -115,7 +108,6 @@ function handleEditForm(evt) {
 
 editForm.addEventListener("submit", handleEditForm);
 
-/// Popup добавления карточек
 const addCardPopup = document.querySelector(".popup_type_new-card");
 const openAddButton = document.querySelector(".profile__add-button");
 const closeAddButton = addCardPopup.querySelector(".popup__close");
@@ -134,7 +126,6 @@ closeAddButton.addEventListener("click", () => {
   closeModal(addCardPopup);
 });
 
-/// Функция загрузки с сервера и добавления карточек на страницу
 function handleAddForm(evt) {
   evt.preventDefault();
   const cardValue = cardInput.value;
@@ -165,7 +156,6 @@ function handleAddForm(evt) {
 
 addForm.addEventListener("submit", handleAddForm);
 
-/// Popup увеличение картинок
 const imgPopup = document.querySelector(".popup_type_image");
 const closePhotoButton = imgPopup.querySelector(".popup__close");
 const zoomedPopupImage = imgPopup.querySelector(".popup__image");
@@ -175,7 +165,6 @@ closePhotoButton.addEventListener("click", () => {
   closeModal(imgPopup);
 });
 
-/// Функция показа Popup увеличения картинок
 function showImgPopup(evt) {
   openModal(imgPopup);
   zoomedPopupImage.setAttribute("src", evt.target.src);
@@ -183,7 +172,6 @@ function showImgPopup(evt) {
   imgPopupCaption.textContent = evt.target.alt;
 }
 
-/// Popup редактирования аватара
 const profileImageButton = document.querySelector(".profile__image_cover");
 const profileImage = document.querySelector(".profile__image");
 const profilePopup = document.querySelector(".popup_type_avatar");
@@ -202,7 +190,6 @@ closeProfileButton.addEventListener("click", () => {
   closeModal(profilePopup);
 });
 
-/// Функция смены аватара
 function handleProfileForm(evt) {
   evt.preventDefault();
   const linkValue = profileLinkInput.value;
@@ -225,7 +212,6 @@ function handleProfileForm(evt) {
 
 profileForm.addEventListener("submit", handleProfileForm);
 
-/// Popup удаления карточки с сервера
 const deletePopup = document.querySelector(".popup_type_delete");
 const closeDeleteButton = deletePopup.querySelector(".popup__close");
 const deleteForm = document.querySelector('form[name="delete-card"');
@@ -240,7 +226,6 @@ const closeDeletePopup = () => {
 
 closeDeleteButton.addEventListener("click", closeDeletePopup);
 
-/// Функция удаления карточки
 function deleteThisCard({ cardId, deleteButton }) {
   deleteMyCard(cardId)
     .then(() => {
@@ -253,7 +238,6 @@ function deleteThisCard({ cardId, deleteButton }) {
     });
 }
 
-///функция подтверждения удаления карточки
 function handleDeleteForm(evt) {
   evt.preventDefault();
   deleteThisCard(getCardForDeletion());
@@ -261,7 +245,6 @@ function handleDeleteForm(evt) {
 
 deleteForm.addEventListener("submit", handleDeleteForm);
 
-///вызов функции получение информации о пользователе и карточках с сервера и заполнение ими страницы
 let profileId;
 
 getInitialInfo();
@@ -278,5 +261,5 @@ Promise.all([getUserInfo(), getInitialCards()])
     console.log(error);
   });
 
-///валидация
+///validation
 enableValidation(validationConfig);

@@ -38,7 +38,6 @@ export function createCard(
   cardTitle.textContent = card.name;
   likeCounter.textContent = card.likes.length;
 
-  ///проверка лайка
   const isLiked = card.likes.some((like) => like._id === profileId);
   if (isLiked) {
     likeButton.classList.add("card__like-button_is-active");
@@ -50,11 +49,10 @@ export function createCard(
 
   cardImage.addEventListener("click", showImgPopup);
 
-  /// проверка на авторство карточки
   if (card.owner._id !== profileId) {
     deleteButton.classList.add("card__delete-button-unactive");
   } else {
-    /// Удаление карточки
+    
     deleteButton.addEventListener("click", () => {
       currentCardId = cardId;
       currentDeleteButton = deleteButton;

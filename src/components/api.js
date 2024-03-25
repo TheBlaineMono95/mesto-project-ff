@@ -1,4 +1,3 @@
-//КОНФИГ ЗАПРОСА
 const config = {
     baseUrl: "https://nomoreparties.co/v1/wff-cohort-9",
     headers: {
@@ -7,7 +6,6 @@ const config = {
     },
   };
   
-  //ФУНКЦИЯ ПРЕОБРАЗОВАНИЯ В JSON
   function getResponseData(res) {
     if (!res.ok) {
       return Promise.reject(`Ошибка: ${res.status}`);
@@ -15,21 +13,18 @@ const config = {
     return res.json();
   }
   
-  //ЗАГРУЗКА КАРТОЧЕК С СЕРВЕРА
   const getCards = () => {
     return fetch(config.baseUrl + "/cards", {
       headers: config.headers,
     }).then(getResponseData);
   };
   
-  //ЗАГРУЗКА ИНФОРМАЦИИ О ПОЛЬЗОВАТЕЛЕ С СЕРВЕРА
   const getInformation = () => {
     return fetch(config.baseUrl + "/users/me", {
       headers: config.headers,
     }).then(getResponseData);
   };
   
-  //ОТПРАВЛЕНИЕ НОВОЙ КАРТОЧКИ НА СЕРВЕР
   const sendingCard = async (name, link) => {
     const res = await fetch(config.baseUrl + "/cards", {
       method: "POST",
@@ -42,7 +37,6 @@ const config = {
     return await getResponseData(res);
   };
   
-  //ОТПРАВЛЕНИЕ ИМЕНИ И ЗАНЯТИЯ О ПОЛЬЗОВАТЕЛЕ НА СЕРВЕР
   const sendingInformation = async (name, about) => {
     const res = await fetch(config.baseUrl + "/users/me", {
       method: "PATCH",
@@ -55,7 +49,6 @@ const config = {
     return await getResponseData(res);
   };
   
-  //ОТПРАВЛЕНИЕ АВАТАРА ПОЛЬЗОВАТЕЛЯ
   const sendingAvatar = async (avatar) => {
     const res = await fetch(config.baseUrl + "/users/me/avatar", {
       method: "PATCH",
@@ -67,7 +60,6 @@ const config = {
     return await getResponseData(res);
   };
   
-  //УДАЛЕНИЕ КАРТОЧКИ С СЕРВЕРА
   const deleteCard = async (cardId) => {
     const res = await fetch(config.baseUrl + `/cards/${cardId}`, {
       method: "DELETE",
@@ -76,7 +68,6 @@ const config = {
     return await getResponseData(res);
   };
   
-  //ДОБАВЛЕНИЕ ЛАЙКА НА СЕРВЕР
   const addLike = async (cardId) => {
     const res = await fetch(config.baseUrl + `/cards/likes/${cardId}`, {
       method: "PUT",
@@ -85,7 +76,6 @@ const config = {
     return await getResponseData(res);
   };
   
-  //УДАЛЕНИЕ ЛАЙКА С СЕРВЕРА
   const deleteLike = async (cardId) => {
     const res = await fetch(config.baseUrl + `/cards/likes/${cardId}`, {
       method: "DELETE",

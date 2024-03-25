@@ -1,3 +1,4 @@
+//Раздел с импортами
 import "../src/pages/index.css";
 import { createCard, removeCard, likeCard } from "../src/components/card";
 import { openModal, closeModal } from "../src/components/modal";
@@ -35,13 +36,13 @@ export { cardsContainer, openImagePopup, profileTitle, profileDescription, profi
 enableValidation(validationConfig);
 let userId;
 
-//ПЛАВНОЕ ОТКРЫТИЕ ВСЕХ ПОПАПОВ
+//Анимация открытия попапов
 const popupList = document.querySelectorAll(".popup");
 popupList.forEach(function (popup) {
   popup.classList.add("popup_is-animated");
 });
 
-//ФУНКЦИЯ КОГДА ИДЕТ ЗАГРУЗКА
+//Функция загрузки
 function renderLoading(popupSubmit, isLoading) {
   if(isLoading) {
     popupSubmit.textContent = 'Сохранение...'
@@ -51,7 +52,7 @@ function renderLoading(popupSubmit, isLoading) {
   }
 }
 
-//КОЛБЭК ИЗОБРАЖЕНИЯ
+//Коллбэк изображения
 const openImagePopup = function (event) {
   popupImageImage.src = event.target.src;
   popupImageImage.alt = event.target.alt;
@@ -59,7 +60,6 @@ const openImagePopup = function (event) {
   openModal(popupTypeImage);
 };
 
-//ОТКРЫТИЕ И ЗАКРЫТИЕ МЕНЮ ДЛЯ РЕДАКТИРОВАНИЯ ИМЕНИ И ЗАНЯТИЯ
 const profileEditButton = document.querySelector(".profile__edit-button");
 profileEditButton.addEventListener("click", function () {
   popupTypeEditNameInput.value = profileTitle.textContent;
@@ -73,7 +73,6 @@ popupEditCloseButton.addEventListener("click", function () {
   closeModal(popupTypeEdit);
 });
 
-//КНОПКА СОХРАНИТЬ В МЕНЮ РЕДАКТИРОВАНИЯ ИМЕНИ И ЗАНЯТИЯ
 const popupFormEdit = popupTypeEdit.querySelector(".popup__form");
 const popupFormEditButton = popupFormEdit.querySelector(".popup__button");
 popupFormEdit.addEventListener("submit", function (evt) {
@@ -94,7 +93,6 @@ popupFormEdit.addEventListener("submit", function (evt) {
     });
 });
 
-//ОТКРЫТИЕ И ЗАКРЫТИЕ МЕНЮ ДЛЯ СОЗДАНИЯ НОВОЙ КАРТОЧКИ
 const profileAddButton = document.querySelector(".profile__add-button");
 profileAddButton.addEventListener("click", function () {
   clearValidation(popupTypeNewCard, validationConfig);
@@ -106,7 +104,6 @@ popupAddCloseButton.addEventListener("click", function () {
   closeModal(popupTypeNewCard);
 });
 
-//КНОПКА СОХРАНИТЬ В МЕНЮ  ДЛЯ СОЗДАНИЯ НОВОЙ КАРТОЧКИ
 const popupFormCard = popupTypeNewCard.querySelector(".popup__form");
 const popupFormCardButton = popupFormCard.querySelector(".popup__button");
 popupFormCard.addEventListener("submit", function (evt) {
@@ -126,7 +123,6 @@ popupFormCard.addEventListener("submit", function (evt) {
     });
 });
 
-//ОТКРЫТИЕ И ЗАКРЫТИЕ МЕНЮ АВАТАРА
 const profileAvatarButton = document.querySelector(".profile__image");
 profileAvatarButton.addEventListener("click", function () {
   clearValidation(popupTypeAvatar, validationConfig);
@@ -138,7 +134,6 @@ profileAvatarCloseButton.addEventListener("click", function () {
   closeModal(popupTypeAvatar);
 });
 
-//КНОПКА СОХРАНИТЬ В МЕНЮ  ДЛЯ ЗАМЕНЫ АВАТАРА
 const popupFormAvatar = popupTypeAvatar.querySelector(".popup__form");
 const popupFormAvatarButton = popupFormAvatar.querySelector(".popup__button");
 popupFormAvatar.addEventListener("submit", function (evt) {
@@ -159,7 +154,6 @@ popupFormAvatar.addEventListener("submit", function (evt) {
     });
 });
 
-//ЗАКРЫТИЕ ПОПАПА ИЗОБРАЖЕНИЯ
 const popupImageCloseButton = popupTypeImage.querySelector(".popup__close");
 popupImageCloseButton.addEventListener("click", function () {
   closeModal(popupTypeImage);

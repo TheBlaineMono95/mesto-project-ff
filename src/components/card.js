@@ -1,7 +1,6 @@
 import { deleteCard, addLike, deleteLike } from "./api";
 const cardTemplate = document.querySelector("#card-template").content;
 
-//ФУНКЦИЯ ДЛЯ СОЗДАНИЯ И УДАЛЕНИЯ КАРТОЧЕК ИЗ МАССИВА
 const createCard = (cardData, deleteCallback, likeCallback, imageCallback, userId) => {
   const cardElement = cardTemplate.cloneNode(true);
   const cardElementImage = cardElement.querySelector(".card__image");
@@ -37,7 +36,6 @@ const createCard = (cardData, deleteCallback, likeCallback, imageCallback, userI
   return cardElement;
 };
 
-//КОЛБЭК УДАЛЕНИЯ
 const removeCard = function (event, cardId) {
   const card = event.target.closest(".places__item");
   deleteCard(cardId)
@@ -47,7 +45,6 @@ const removeCard = function (event, cardId) {
     .catch((err) => console.log(err));
 };
 
-//КОЛБЭК ЛАЙКА
 const likeCard = function (event, cardId) {
   const card = event.target.closest(".places__item");
   const counterLikes = card.querySelector(".card__likes-amount");

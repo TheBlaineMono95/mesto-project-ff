@@ -6,7 +6,7 @@ export const config = {
     },
   };
   
-  fexport const getResData = (res) => {
+  export const getResData = (res) => {
     if (res.ok) {
       return res.json();
     }

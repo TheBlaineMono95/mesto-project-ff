@@ -1,6 +1,15 @@
+export const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
 import "./pages/index.css";
 
-import { createCard, likeCard, getCardForDeletion } from "./scripts/card.js";
+import { createCard, likeCard } from "./scripts/card.js";
 
 import { openModal, closeModal } from "./scripts/modal.js";
 
@@ -16,10 +25,9 @@ import {
   updateNewAvatar,
 } from "./scripts/api.js";
 
-import { validationConfig } from "./scripts/validation.js";
-
 const cardTemplate = document.querySelector("#card-template").content;
 const placesList = document.querySelector(".places__list");
+let currentCardId, currentDeleteButton;
 
 function addCard(
   card,
@@ -216,7 +224,9 @@ const deletePopup = document.querySelector(".popup_type_delete");
 const closeDeleteButton = deletePopup.querySelector(".popup__close");
 const deleteForm = document.querySelector('form[name="delete-card"');
 
-const openDeletePopup = () => {
+const openDeletePopup = (cardId, deleteButton) => {
+  currentCardId = cardId;
+  currentDeleteButton = deleteButton;
   openModal(deletePopup);
 };
 
@@ -238,6 +248,9 @@ function deleteThisCard({ cardId, deleteButton }) {
     });
 }
 
+function getCardForDeletion() {
+  return { cardId: currentCardId, deleteButton: currentDeleteButton };
+}
 function handleDeleteForm(evt) {
   evt.preventDefault();
   deleteThisCard(getCardForDeletion());

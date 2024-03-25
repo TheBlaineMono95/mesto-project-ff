@@ -1,7 +1,5 @@
 import { putLike, deleteLike } from "./api.js";
 
-let currentCardId, currentDeleteButton;
-
 export function likeCard(likeButton, likeCounter, cardId) {
   const likeMethod = likeButton.classList.contains(
     "card__like-button_is-active"
@@ -54,15 +52,10 @@ export function createCard(
   } else {
     
     deleteButton.addEventListener("click", () => {
-      currentCardId = cardId;
-      currentDeleteButton = deleteButton;
-      openDeletePopup();
+      openDeletePopup(cardId, deleteButton);
     });
   }
 
   return cardElement;
 }
 
-export function getCardForDeletion() {
-  return { cardId: currentCardId, deleteButton: currentDeleteButton };
-}
